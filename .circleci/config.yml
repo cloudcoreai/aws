@@ -40,14 +40,12 @@ jobs:
           name: Install Dependencies
           command: |
             apk add --update ansible
-            python3 --version
             python -m pip install boto3
             pip install botocore
-            pip show boto3
       - run:
           name: Configure Server
           command: |
-            ansible-playbook -vvvv -i inventory/aws_ec2.yml --list-hosts playbook.yml
+            ansible-playbook -vvvv -i inventory/aws_ec2.yml playbook.yml
 
 # ***** SOFTWARE DEPLOYMENT END *****
 workflows:
