@@ -3,20 +3,18 @@
 
 # Install HTTPD
 - name: "Install apache"
-  become: true
-  yum:
-      name: httpd
-      state: latest
+  apt:
+    name: apache2
+    state: latest
+    update_cache: yes
 
 - name: "Run httpd"
-  become: true #elevating prevliges to SUDO
   service:
-      name: httpd
-      state: started
-      enabled: yes
+    name: apache2
+    state: started
+    enabled: yes
 
 - name: "change /var/www/html permissions"
-  become: true
   file:
     path: /var/www/html
     state: directory

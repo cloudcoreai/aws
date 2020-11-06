@@ -1,13 +1,15 @@
 ---
-# Update the VM.
-# - name: "Update VM"
-#   become: true
-#   yum:
-#     update_cache: yes
-#     state: latest
+- name: update
+  apt:
+    update_cache: true
 
-- name: upgrade all packages
-  become: true
-  yum:
-    name: '*'
+- name: install pip
+  apt:
+    name: python3-pip
     state: latest
+
+- name: install boto3 and botocore
+  apt:
+    name:
+    - python3-boto3
+    - python3-botocore
