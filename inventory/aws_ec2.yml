@@ -3,7 +3,6 @@ plugin: aws_ec2
 regions:
   - us-west-1
 
-boto_profile: default
 strict: False
 
 hostnames:
