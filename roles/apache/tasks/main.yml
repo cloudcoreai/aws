@@ -13,7 +13,7 @@
   service:
       name: httpd
       state: started
-      enabled: true
+      enabled: yes
 
 - name: "change /var/www/html permissions"
   become: true
