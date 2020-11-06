@@ -1,0 +1,59 @@
+version: 2.1
+
+defaults: &awscli_docker_container
+  docker:
+    - image: amazon/aws-cli
+
+commands:
+  run_cloudformation_template_cli:
+    steps:
+    - run: 
+        command: |
+          aws cloudformation deploy --template-file aws_cfn_template.yml --stack-name udacityProject --region=us-west-1
+jobs:
+# ***** AWS INFRASTRUCTURE *****
+  run_cloudformation_template_job:
+    <<: *awscli_docker_container
+    
+    steps:
+      - checkout
+      - run_cloudformation_template_cli
+      - run:
+          name: Run when the job is complete
+          command: |
+            echo "AWS Infrastructure Deployed"
+      - run:
+          name: Adding EC2 Instance Name to Inventory
+          command: |
+            aws ec2 describe-instances --query 'Reservations[*].Instances[*].PublicIpAddress'
+# ***** AWS INFRASTRUCTURE END *****
+
+# ***** SOFTWARE DEPLOYMENT START *****
+  deploy_software:
+    docker:
+      - image: python:3.9.0-alpine3.12
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints: ["e0:1a:de:d5:79:f7:75:c7:44:d2:04:12:2c:bd:78:f9"]
+      - run:
+          name: Install Dependencies
+          command: |
+            apk add --update ansible
+      - run:
+          name: Run Echo when the job is complete
+          command: |
+            echo Finished installing Dependencies
+      - run:
+          name: Configure Server
+          command: |
+            ansible-playbook -vvvv -i production playbook.yml
+
+# ***** SOFTWARE DEPLOYMENT END *****
+workflows:
+  run_cloudformation_template_workflow:
+    jobs:
+      - run_cloudformation_template_job
+      - deploy_software:
+          requires:
+            - run_cloudformation_template_job

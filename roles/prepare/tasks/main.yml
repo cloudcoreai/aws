@@ -1,0 +1,13 @@
+---
+# Update the VM.
+# - name: "Update VM"
+#   become: true
+#   yum:
+#     update_cache: yes
+#     state: latest
+
+- name: upgrade all packages
+  become: true
+  yum:
+    name: '*'
+    state: latest

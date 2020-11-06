@@ -1,0 +1,29 @@
+---
+#Apache Tasks
+
+# Install HTTPD
+- name: "Install apache"
+  become: true
+  yum:
+      name: httpd
+      state: latest
+
+- name: "Run httpd"
+  become: true #elevating prevliges to SUDO
+  service:
+      name: httpd
+      state: started
+      enabled: true
+
+- name: "change /var/www/html permissions"
+  become: true
+  file:
+    path: /var/www/html
+    state: directory
+    mode: 0777
+
+- name: "install index page"
+  copy:
+      src: index.html
+      dest: /var/www/html/index.html
+      backup: yes
