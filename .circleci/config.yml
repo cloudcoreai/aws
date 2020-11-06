@@ -43,7 +43,7 @@ jobs:
       - run:
           name: Configure Server
           command: |
-            ansible-playbook -vvvv -i inventory/aws_ec2.yml --list playbook.yml
+            ansible-playbook -vvvv -i inventory/aws_ec2.yml --list-hosts playbook.yml
 
 # ***** SOFTWARE DEPLOYMENT END *****
 workflows:
