@@ -1,6 +1,6 @@
 ---
 - name: install apache
-  hosts: localhost
+  hosts: '*'
   remote_user: ec2-user
   roles:
     - prepare
