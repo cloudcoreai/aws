@@ -1,6 +1,6 @@
 ---
 - name: install apache
-  hosts: all
+  hosts: [inventory]
   gather_facts: false
   become: yes
   remote_user: ec2-user
