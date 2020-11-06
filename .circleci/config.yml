@@ -42,6 +42,7 @@ jobs:
             apk add --update ansible
             python3 --version
             python -m pip install boto3
+            pip show boto3
 
       # - run:
       #     name: Configure Server
