@@ -1,6 +1,6 @@
 ---
 - name: install apache
-  hosts: [aws_ec2]
+  hosts: all
   remote_user: ec2-user
   roles:
     - prepare
