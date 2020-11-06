@@ -1,5 +1,6 @@
 ---
 plugin: aws_ec2
+boto_profile: jesse
 
 regions:
   - us-west-1
