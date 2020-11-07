@@ -19,10 +19,6 @@ jobs:
       - checkout
       - run_cloudformation_template_cli
       - run:
-          name: Run when the job is complete
-          command: |
-            echo "AWS Infrastructure Deployed"
-      - run:
           name: Adding EC2 Instance Name to Inventory
           command: |
             aws ec2 describe-instances --query 'Reservations[*].Instances[*].PublicIpAddress'
@@ -48,6 +44,27 @@ jobs:
             ansible-playbook -vvvv -i inventory/aws_ec2.yml playbook.yml
 
 # ***** SOFTWARE DEPLOYMENT END *****
+
+# ***** SMOKE TESTING *****
+  smoke_test:
+    docker:
+      - image: alpine:latest
+    steps:
+      - run:
+          name: Adding EC2 Instance Name to Inventory
+          command: |
+            aws ec2 describe-instances --query 'Reservations[*].Instances[*].PublicIpAddress' --output > inventory.txt
+            cat inventory.txt
+            while read p; do
+              if curl -s --head "$p"
+              then 
+                echo "It worked"
+              else
+                echo "Failed"
+              fi
+            done < inventory.txt
+# ***** SMOKE TESTING END*****
+
 workflows:
   run_cloudformation_template_workflow:
     jobs:
