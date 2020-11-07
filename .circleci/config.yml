@@ -52,7 +52,7 @@ jobs:
       - run:
           name: Adding EC2 Instance Name to Inventory
           command: |
-            aws ec2 describe-instances --query 'Reservations[*].Instances[*].PublicIpAddress' --output > inventory.txt
+            aws ec2 describe-instances --query 'Reservations[*].Instances[*].PublicIpAddress' --output text > inventory.txt
             cat inventory.txt
             while read p; do
               if curl -s --head "$p"
