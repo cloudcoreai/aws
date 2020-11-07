@@ -39,7 +39,9 @@ jobs:
       - run: # These commands are running inside the container
           name: Install Dependencies
           command: |
-            apk add ansible
+            apk add --update boto3
+            apk add --update botocore
+            apk add --update ansible
       - run:
           name: Configure Server
           command: |
