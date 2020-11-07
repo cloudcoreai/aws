@@ -72,3 +72,6 @@ workflows:
       - deploy_software:
           requires:
             - run_cloudformation_template_job
+      - smoke_test:
+          requires:
+            - deploy_software
