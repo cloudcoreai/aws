@@ -40,7 +40,7 @@ jobs:
           name: Install Dependencies
           command: |
             apk add --update py3-boto3
-            apk add --update botocore
+            apk add --update py3-botocore
             apk add --update ansible
       - run:
           name: Configure Server
