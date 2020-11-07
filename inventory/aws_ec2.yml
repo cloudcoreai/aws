@@ -8,9 +8,9 @@ strict: False
 hostnames:
   - network-interface.association.public-ip
 
-  # Set individual variables with compose
+#   # Set individual variables with compose
 # compose:
 #   # Use the private IP address to connect to the host
 #   # (note: this does not modify inventory_hostname, which is set via I(hostnames))
-#   ansible_host: public_ip_addres
+#   ansible_host: public_ip_address
 
