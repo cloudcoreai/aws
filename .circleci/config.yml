@@ -57,9 +57,9 @@ jobs:
             while read p; do
               if curl -s --head "$p"
               then 
-                return 0
+                exit 0
               else
-                return 1
+                exit 1
               fi
             done < inventory.txt
 # ***** SMOKE TESTING END*****
