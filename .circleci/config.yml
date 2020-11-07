@@ -39,7 +39,7 @@ jobs:
       - run: # These commands are running inside the container
           name: Install Dependencies
           command: |
-            apt install ansible
+            apk add ansible
       - run:
           name: Configure Server
           command: |
