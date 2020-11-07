@@ -36,6 +36,10 @@ jobs:
       - checkout
       - add_ssh_keys:
           fingerprints: ["3f:64:99:a3:57:c6:de:85:0b:9b:57:47:4f:19:c4:e9"]
+      - run: # These commands are running inside the container
+          name: Install Dependencies
+          command: |
+            apk add --update ansible
       - run:
           name: Configure Server
           command: |
