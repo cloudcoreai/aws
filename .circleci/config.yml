@@ -47,8 +47,7 @@ jobs:
 
 # ***** SMOKE TESTING *****
   smoke_test:
-    docker:
-      - image: alpine:latest
+    <<: *awscli_docker_container
     steps:
       - run:
           name: Adding EC2 Instance Name to Inventory
